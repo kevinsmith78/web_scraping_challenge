@@ -7,11 +7,11 @@ import requests
 
 def init_browser():
     executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=False)
+    return browser =('chrome', **executable_path, headless=False)
 
 def scrape():
     #Run Browser
-    browser=init_browser()
+    browser = init_browser()
 
     #Visit Red Plant News
     url_news= "https://redplanetscience.com/"
