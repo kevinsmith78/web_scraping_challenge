@@ -17,14 +17,12 @@ def scrape():
     url_news= "https://redplanetscience.com/"
     browser.visit(url_news)
 
-    #Start Soup
+    # Identify and Parse 
     html_news= browser.html
     soup= bs(html_news,"html.parser")
 
-    #Get News Results
+    # Scrape the latest News
     news_title=soup.find("div",class_="content_title").text
-
-    #Search for Paragraphs
     news_paragraph=soup.find("div", class_="article_teaser_body").text
 
     # Print the Latest News
@@ -47,6 +45,9 @@ def scrape():
     #Create Featured URL link per homework assignment
     featured_image_url= url+ img_url
     featured_image_url
+
+    url_info = "https://galaxyfacts-mars.com/"
+    browser.visit(url_info)
 
     #Read the data from the site
     mars_info=pd.read_html(url_info)
@@ -75,15 +76,13 @@ def scrape():
     #Save to folder
     clean_mars.to_html("Mars_facts_data.html")
 
-    # HEMISPHERSES #
-
     #Get Url
     hemisphere_url = "https://marshemispheres.com/"
     browser.visit(hemisphere_url)
 
     # HTML object using soup
     html_hemisphere = browser.html
-    soup = bs(html_hemisphere, "html.parser")
+    soup= bs(html_hemisphere, "html.parser")
 
     #Scrape, Scrape, Scrape
     hemispheres = soup.find_all("div", class_="item")
@@ -100,10 +99,21 @@ def scrape():
         # Visit link  
         browser.visit(hemispheres_url + hemispheres_img)
         # Develop image url
+        image_html=browser.html
+        web_info=bs(image_html,"html.parser")
+        #Complete URL
         img_url = hemispheres_url + web_info.find("img",class_="wide-image")["src"]
         hemi_info.append({"title":title,"img_url":img_url})
         # Display titles 
+        print("")
         print(title)
         print(img_url)
+
+    # Part 2 Return scraping as dictionary
+    mars_dict={'news_title': news_title,
+         'news_paragraph':news_paragraph,
+         'featured_image_url': featured_image_url,
+         'mars_info': clean_mars,
+         'hemisphere_image_urls':hemi_info}
 
 browser.quit()
