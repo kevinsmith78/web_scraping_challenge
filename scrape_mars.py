@@ -7,7 +7,7 @@ import requests
 
 def init_browser():
     executable_path = {'executable_path': ChromeDriverManager().install()}
-    return browser =('chrome', **executable_path, headless=False)
+    browser = Browser('chrome', **executable_path, headless=False)
 
 def scrape():
     #Run Browser
@@ -47,3 +47,63 @@ def scrape():
     #Create Featured URL link per homework assignment
     featured_image_url= url+ img_url
     featured_image_url
+
+    #Read the data from the site
+    mars_info=pd.read_html(url_info)
+    mars_info
+
+    #Create the DataFrame
+    info_df=mars_info[0]
+
+    #Create the Data Step #2
+    info_df.columns = ["Category", "Mars","Value-Earth"]
+
+    #Set index
+    info_df
+
+    # Modify Table
+    mod_info_df=info_df.drop('Value-Earth', axis=1)
+    mod_info_df
+
+    # Clean up Table
+    clean_mars=mod_info_df.drop(0)
+    clean_mars
+
+    #Save table to html
+    html_table=clean_mars.to_html()
+
+    #Save to folder
+    clean_mars.to_html("Mars_facts_data.html")
+
+    # HEMISPHERSES #
+
+    #Get Url
+    hemisphere_url = "https://marshemispheres.com/"
+    browser.visit(hemisphere_url)
+
+    # HTML object using soup
+    html_hemisphere = browser.html
+    soup = bs(html_hemisphere, "html.parser")
+
+    #Scrape, Scrape, Scrape
+    hemispheres = soup.find_all("div", class_="item")
+
+    # Create list
+    hemi_info = []
+    # Assign url 
+    hemispheres_url = "https://marshemispheres.com/"
+
+    # Loop through the list of all hemispheres
+    for x in hemispheres:
+        title = x.find("h3").text
+        hemispheres_img = x.find("a",class_="itemLink product-item")["href"]
+        # Visit link  
+        browser.visit(hemispheres_url + hemispheres_img)
+        # Develop image url
+        img_url = hemispheres_url + web_info.find("img",class_="wide-image")["src"]
+        hemi_info.append({"title":title,"img_url":img_url})
+        # Display titles 
+        print(title)
+        print(img_url)
+
+browser.quit()
