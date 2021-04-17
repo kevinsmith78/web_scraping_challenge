@@ -9,7 +9,7 @@ mongo= Pymongo(app, url="mongo://localhost:27017/Mars_db")
 @app.route("/")
 def index():
     mars=mongo.db.Mars.find_one()
-    return render_template("index.html"),mars=mars)
+    return render_template("index.html"),mars=Mars)
 
 @app route("/scrape")
 def scrape():
