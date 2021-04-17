@@ -10,10 +10,10 @@
    
 </head>
 <body></body>
-    <div class="container">
-        <div class="jumbotron text-center border-bottom">
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
             <h1 class="font-weight-bold">Mission to Ares</h1>
-            <p><a class="btn btn-primary byn-md" href="scrape" role="button">Scrape New Data</a></p>
+            <p><a class="btn btn-primary btn-lg" href="/scrape_mars.py" role="button">Scrape New Data</a></p>
         </div>
 
         <div class= "row">
@@ -24,19 +24,19 @@
 </br>
     <div class="row">
         <div class="col-md-12">
+            <div class=media>
             <h4>{{mars.news_title}}</h4>
             <p>{{mars.news_parapraph}}</p>
             </div>
+            </div>
         </div>
+        <!-- Add featured Image-->
         <div class="border">
             <h2 class=""><u> Featured Mars Image</u></h2>
-        </br>
-    <img class="col-md-12 border" src={{mars.featured_image_url}}" alt="Featured Mars Image">
-
-    </div>
-    <div class="col-md-4">
-        <br>
-        <div class="card">
+                <img class="col-md-12 border" src={{mars.featured_image_url}}" class="img-responsive">
+        </div>
+            <div class="col-md-3">
+                <div class="card">
             <h3>Mars Information</h3>
             {{mars.mars.clean | safe}}
         </div>
@@ -49,18 +49,17 @@
             </div>
         </div>
     </br>
-    <div class ="row">
+    <div class ="row" style ="margin-top: 80px;">
         {mars.Hemispheres}
-        <div class="col-6 border">
-        </br>
-            <div>
+        <div class="col-md-6">
+            <div class = "thumbnail">
+                <img src="hemisphere_url">
+                    <div class="caption">
                 <img width="520 px height="512" src="{{hemi.image}}">
-            </div>
-
-        
+            </div>        
         </div>
     </div>
-    <hr>
+    
     <footer class="footer">
         <span class="bottom">Mars Explore</span>
         </div>
