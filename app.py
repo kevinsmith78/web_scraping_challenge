@@ -15,11 +15,12 @@ def index():
 @app route("/scrape")
 def scrape():
 
-    mars=mongo.db.mars
+    mars=mongo.db.Mars
     mars_data = scrape_mars.scrape()
     mars.update({},mars_data,upsert=True)
+    return redirect("/")
 
     
-    if__name__=="__main__":
+if__name__=="__main__":
     app.run(debug=True)
 
