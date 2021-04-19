@@ -113,7 +113,8 @@ def scrape():
     mars_dict={'news_title': news_title,
          'news_paragraph':news_paragraph,
          'featured_image_url': featured_image_url,
-         'mars_info': clean_mars,
+         'mars_info': clean_mars(),
          'hemisphere_image_urls':hemi_info}
 
 browser.quit()
+return mars_dict
